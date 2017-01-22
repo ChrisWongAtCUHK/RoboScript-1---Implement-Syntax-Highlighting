@@ -1,13 +1,10 @@
 function highlight(code) {
-  return code.replace(/F+|L+|R+|\d+/g, (x) => {
-    if(/F+/.test(x)){
-      return '<span style="color: pink">' + x + '</span>';
-    } else if(/L+/.test(x)){
-      return '<span style="color: red">' + x + '</span>';
-    } else if(/R+/.test(x)){
-      return '<span style="color: green">' + x + '</span>';
-    } else if(/\d+/.test(x)){
-    	return '<span style="color: orange">' + x + '</span>';
-    }
-  });
+  const style = color => `<span style="color: ${color}">$&</span>`;
+  
+  code = code.replace(/F+/g, style('pink'));
+  code = code.replace(/L+/g, style('red'));
+  code = code.replace(/R+/g, style('green'));
+  code = code.replace(/[0-9]+/g, style('orange'));
+  
+  return code;
 }
